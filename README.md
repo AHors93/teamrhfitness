@@ -1,62 +1,81 @@
-Team RH Engineer Technical Test
-==================================
+# Team RH Fitness - Exercise Finder
 
-Welcome to the Team RH Technical Test!
+A web application that finds exercises by muscle group using the WGER API.
 
-We hope that you find this exercise fun and interesting. There are no trick questions; we want to see your solution to a simple problem with well thought-out and well structured code.
+## Quick Start
 
-## Coding Test
+1. **Clone and install:**
+```bash
+git clone <repository-url>
+cd teamrhfitness
+npm install
+cd frontend
+npm install
+cd ..
+```
 
-You should use the public WGER API [https://wger.de/en/software/api](https://wger.de/en/software/api) to get exercise information. We'd specifically like you to use the `exercise` endpoint that is documented at [https://wger.de/api/v2/exercise/](https://wger.de/api/v2/exercise/) and filter by the muscles that the exercise trains.
+2. **Start the app:**
+```bash
+npm run start:web
+```
 
-As an example, [https://wger.de/api/v2/exercise?muscles=1](https://wger.de/api/v2/exercise?muscles=1) returns a list of exercises that train biceps.
+3. **Open browser:**
+Go to `http://localhost:3001`
 
-The task is to create an application that accepts a muscle as a parameter. The application should then display the following information about each exercise that trains that muscle by querying the API:
+## Commands
 
-- Name
-- Description
-- Other muscles the exercise trains (if any)
+- `npm run start:web` - Start the web application
+- `npm start <muscle>` - Run CLI version (e.g., `npm start chest`)
+- `npm test` - Run tests
+- `npm run build:web` - Build for production
 
-The specific muscle IDs can be retrieved from [https://wger.de/api/v2/muscle](https://wger.de/api/v2/muscle)
+## Supported Muscles
 
-### Platform Choice
+Try searching for: `chest`, `biceps`, `triceps`, `lats`, `quads`, `hamstrings`, `shoulders`, `abs`, `glutes`, `calves`
 
-You can create the application as either a command line application, web application or mobile application in any of the following platforms
+## Note
 
-- JavaScript/TypeScript with React for web applications.
-- JavaScript/TypeScript for command line applications
-- iOS or Android for mobile applications
+In prod I'd remove src/index.ts and CLI functionality but left it in for demonstration puproses as I actually built something very similar previously so was a bit of a lift and shift ✌️
 
-Think about the type of role you are applying for and **choose an appropriate application type and platform**.
+## Tech Stack
 
-### Task requirements
+- **Backend**: Node.js, Express, TypeScript
+- **Frontend**: React, Tailwind CSS
+- **API**: WGER Exercise Database
 
-Feel free to spend as much or as little time on this as you like as long as the following requirements have been met. However, we understand people have busy lives and would guide you to spend no more than 2-3 hours on a submission.
+## Improvements i'd make with more time
 
-Please include a readme that details some of your choices and what you would like to have added if you had more time. You should look at this as the complete solution, it's much quicker to explain what you would like to have done than code it.
+### Frontend & UX
+- **Architecture & Code Structure**: I'd firstly and most importantly break down App.tsx into smaller, focused components with single responsibilities. I'd move data fetching logic out of the main App component and into hooks (useMuscleSearch, useExercises for example) or service components to avoid the entire app handling data fetching on mount
+- **Styling**: Better visual design, animations, and responsive layout, with Native would be able to use a lot of their built in methods
+- **Search Improvements**: Fix autocomplete for 'calves' and other muscle groups
+- **Loading States**: Better loading indicators and skeleton screens, look a bit naff at the moment
+- **Error Handling**: More user-friendly error messages and retry mechanisms
+- **Accessibility**: ARIA labels, keyboard navigation, screen reader support
+- **Reusability**: Would break down componets like 'Header' and pass props (text, color etc etc) in to make it more reusable
 
-- Please complete the user story below.
-- Feel free to use whatever libraries / packages you like in the context of the technologies detailed above.
-- You **must** include tests.
+### React Query Optimization
+- **Better Caching**: Implement proper cache invalidation and background refetching
+- **Updates**: Update UI immediately while API calls are in progress
+- **Infinite Queries**: I'd like to paginate the exercise results for better performance 
+- **Prefetching**: Preload popular muscle groups for faster UX? One to discuss if that's how we'd like to scale, but can cause slower load times on initial load
 
-### User Story
+### Backend & Architecture
+- **AWS Lambda**: Convert Express server to serverless functions
+- **EventBridge**: Use AWS EventBridge for decoupled event handling
+- **API Gateway**: Add rate limiting, authentication, and request validation
+- **DynamoDB**: Store user preferences, favorites, and search history
+- **CloudFront**: CDN for static assets and API caching
+- **SQS/SNS**: Queue system for background processing
+- **Express**: Not implementing proper HTTP caching stratgies in the Express server
+- **Security**: JWT, OAuth for user verification
 
-Given I am a **user running the application**
+### Performance & Scalability
+- **Database**: Add DynamoDB or S3 depending on data use cases
+- **Code Splitting**: I'd like to split the code up a bit more
 
-When I **submit a muscle (e.g. biceps)**
-
-Then I want to see a **list of exercises**
-
-And I only want to see **exercises that train that muscle**
-
-#### Acceptance criteria
-
-- For the known muscle `biceps`, results are returned
-- For each exercise, the name, description and other muscles trained are displayed
-
-# The deliverable
-Please submit a git repository (Github/Bitbucket etc.) that includes your code, along with a README that contains:
-- A covering note explaining the choices you have made and what you would like to have added if you had more time.
-- Any instructions required to run your solution and tests in a unix environment.
-
-#### Thanks for your time, we look forward to hearing from you!
+### DevOps & Monitoring
+- **CI/CD**: I'd use GitHub Actions (or Gitlab) for automated testing, deployment and would add security checks in here too
+- **Monitoring**: CloudWatch & DataDog for observability
+- **Logging**: Better and more structured logs
+- **Testing**: Add Integration and End 2 End tests

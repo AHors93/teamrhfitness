@@ -1,0 +1,32 @@
+{
+  "name": "teamrhfitness",
+  "version": "1.0.0",
+  "description": "Team RH Engineer Technical Test ==================================",
+  "main": "index.js",
+  "scripts": {
+  "start": "ts-node src/index.ts",
+  "start:web": "ts-node src/web/server.ts",
+  "build": "tsc",
+  "build:web": "tsc && npm run build:frontend",
+  "build:frontend": "cd frontend && npm run build",
+  "test": "jest"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "axios": "^1.12.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.5.2",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}
