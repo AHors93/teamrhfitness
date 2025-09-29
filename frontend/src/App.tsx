@@ -27,8 +27,11 @@ function App() {
     try {
       const result = await apiService.getExercisesByMuscle(muscleName);
       setExercises(result);
-    } catch (err: any) {
-      setError(err?.response?.data?.error || 'Failed to fetch exercises');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error 
+        ? err.message 
+        : 'Failed to fetch exercises';
+      setError(errorMessage);
       setExercises(null);
     } finally {
       setIsLoading(false);

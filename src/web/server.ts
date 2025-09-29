@@ -23,8 +23,8 @@ app.get('/api/muscles', async (req, res) => {
   try {
     const muscles = await getAllMuscles();
     res.json(muscles);
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
+  } catch (error) {
+    res.status(500).json({ error: error });
   }
 });
 
@@ -43,8 +43,8 @@ app.get('/api/muscles/search', async (req, res) => {
 
     const muscleName = await getMuscleNameById(muscleId);
     res.json({ id: muscleId, name: muscleName });
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
+  } catch (error) {
+    res.status(500).json({ error: error });
   }
 });
 
@@ -71,8 +71,8 @@ app.get('/api/exercises', async (req, res) => {
       exercises: formatted,
       count: formatted.length
     });
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
+  } catch (error) {
+    res.status(500).json({ error: error });
   }
 });
 

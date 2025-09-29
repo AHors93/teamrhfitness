@@ -27,12 +27,13 @@ eventBus.on<{ muscleName: string }>("MuscleSelected", async ({ muscleName }) => 
 
     console.log(`\n📊 Found ${exercises.length} exercise(s) for ${muscleName}`);
     eventBus.emit("ExercisesFetched", { exercises: formatted, muscleName });
-  } catch (err: any) {
-    console.error("❌ Error fetching exercises:", err.message);
-    if (err.code === 'ENOTFOUND') {
-      console.error("💡 Check your internet connection");
-    }
-  }
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+        console.error("❌ Error fetching exercises:", errorMessage);
+        if (err instanceof Error && 'code' in err && err.code === 'ENOTFOUND') {
+          console.error("💡 Check your internet connection");
+        }
+      }
 });
 
 eventBus.on<{ exercises: (FormattedExercise & { otherMuscleNames: string[] })[], muscleName: string }>("ExercisesFetched", ({ exercises, muscleName }) => {

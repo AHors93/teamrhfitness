@@ -47,9 +47,9 @@ In prod I'd remove src/index.ts and CLI functionality but left it in for demonst
 
 ### Frontend & UX
 - **Architecture & Code Structure**: I'd firstly and most importantly break down App.tsx into smaller, focused components with single responsibilities. I'd move data fetching logic out of the main App component and into hooks (useMuscleSearch, useExercises for example) or service components to avoid the entire app handling data fetching on mount
-- **Styling**: Better visual design, animations, and responsive layout, with Native would be able to use a lot of their built in methods
+- **Styling**: Better visual design, animations, and responsive layout, with Native would be able to use a lot of their built in methods. 
 - **Search Improvements**: Fix autocomplete for 'calves' and other muscle groups
-- **Loading States**: Better loading indicators and skeleton screens, look a bit naff at the moment
+- **Loading States**: Add someloading indicators and skeleton screens
 - **Error Handling**: More user-friendly error messages and retry mechanisms
 - **Accessibility**: ARIA labels, keyboard navigation, screen reader support
 - **Reusability**: Would break down componets like 'Header' and pass props (text, color etc etc) in to make it more reusable

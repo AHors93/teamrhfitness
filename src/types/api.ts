@@ -18,8 +18,8 @@ export interface Exercise {
   language: number;
   license: number;
   license_author: string;
-  images: any[];
-  comments: any[];
+  images: string[];
+  comments: string[];
   variations: number[];
 }
 
